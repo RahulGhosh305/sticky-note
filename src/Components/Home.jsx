@@ -35,7 +35,6 @@ const notesReducer = (prevState, action) => {
 const Home = () => {
     const [notesState, dispatch] = useReducer(notesReducer, initialState)
     const [noteText, setNoteText] = useState('')
-    // const [show, setToggleShow] = useState(false)
 
     const addNote = (e) => {
         e.preventDefault();
@@ -52,9 +51,11 @@ const Home = () => {
 
         dispatch({ type: 'ADD_NOTE', payload: newNote })
         setNoteText('')
-        // setToggleShow(false)
     }
 
+    const clear = () => {
+        setNoteText('')
+    }
 
     const dropNote = (e) => {
         e.target.style.left = `${e.pageX - 50}px`;
@@ -88,44 +89,14 @@ const Home = () => {
             <div className="container">
                 <h1>Sticky Note</h1>
 
-                {/* <button onClick={() => setToggleShow(!show)} className="btn btn-success">Add New Note</button> */}
-
-
-
                 <div>
-
-
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#declineModal">
                         Create Note
                     </button>
 
-
-
-
-                    {/* {
-                        show && <div className="formBox">
-                            <form className="main-form" onSubmit={addNote}>
-                                <textarea placeholder="Write Note..."
-                                    value={noteText}
-                                    onChange={(e) => setNoteText(e.target.value)}
-                                ></textarea>
-
-                                <button id="x-icon" onClick={() => setToggleShow(!show)}></button>
-                                <button></button>
-                            </form>
-                        </div>
-                    } */}
-
-
-
-
-
-
-
-
                     <div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content">
+                            <div class="modal-content modalStyle">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Add New Note</h5>
                                 </div>
@@ -136,24 +107,14 @@ const Home = () => {
                                             onChange={(e) => setNoteText(e.target.value)}
                                         ></textarea>
 
-                                        <button id="x-icon" type="button" class="btn btn-secondary" data-dismiss="modal"></button>
+                                        <button onClick={(e)=>clear()} id="x-icon" type="button" class="btn btn-secondary" data-dismiss="modal"></button>
                                         
                                         <button></button>
-                                        
-                                    
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
 
                     <div className='display-note'>
                         {notesState.notes.map((note) => (
@@ -177,3 +138,4 @@ const Home = () => {
 };
 
 export default Home;
+
